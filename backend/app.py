@@ -9,6 +9,41 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.neighbors import NearestNeighbors
+import os
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+
+MODEL_ID = os.getenv("HF_MODEL_ID", "kev223/synctype-model")
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173")
+
+app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": [FRONTEND_URL]}})
+
+tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
+model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_ID)
+
+@app.get("/")
+def home():
+    return {"message": "SyncType backend is running"}
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
+@app.post("/translate")
+def translate():
+    data = request.get_json(force=True)
+    text = data.get("text", "").strip()
+
+    if not text:
+        return jsonify({"translation": "", "error": "No text provided"}), 400
+
+    inputs = tokenizer(text, return_tensors="pt")
+    outputs = model.generate(**inputs, max_new_tokens=64)
+    translation = tokenizer.decode(outputs[0], skip_special_tokens=True)
+
+    return jsonify({"translation": translation})
 
 BASE_DIR = Path(__file__).resolve().parent
 DATA_PATH = BASE_DIR / "combined_dataset.csv"
