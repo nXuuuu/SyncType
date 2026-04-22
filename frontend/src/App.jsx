@@ -253,7 +253,7 @@ export default function App() {
           <div className="mx-auto max-w-6xl px-5 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <img
-                src="public/mylogo.svg"
+                src="frontend/public/mylogo.svg"
                 alt="SyncType logo"
                 className="h-9 w-9 object-contain"
               />
