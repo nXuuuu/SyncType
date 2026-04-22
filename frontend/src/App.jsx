@@ -704,7 +704,7 @@ export default function App() {
             <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
               <div className="flex items-center gap-3">
                 <img
-                  src="public/mylogo.svg"
+                  src="frontend/public/mylogo.svg"
                   alt="SyncType logo"
                   className="h-9 w-9 object-contain"
                 />
