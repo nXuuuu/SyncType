@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  min-height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth dark mode transitions on all elements */
+*, *::before, *::after {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 0.25s;
+  transition-timing-function: ease;
+}
+
+/* Custom scrollbar - dark */
+.dark ::-webkit-scrollbar { width: 6px; }
+.dark ::-webkit-scrollbar-track { background: rgba(255,255,255,0.03); }
+.dark ::-webkit-scrollbar-thumb { background: rgba(16,185,129,0.3); border-radius: 3px; }
+.dark ::-webkit-scrollbar-thumb:hover { background: rgba(16,185,129,0.5); }
+
+/* Custom scrollbar - light */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: rgba(5,150,105,0.04); }
+::-webkit-scrollbar-thumb { background: rgba(5,150,105,0.2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(5,150,105,0.4); }
+
+/* Selection color */
+.dark ::selection { background: rgba(16,185,129,0.3); color: white; }
+::selection { background: rgba(5,150,105,0.2); color: #0f172a; }
