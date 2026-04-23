@@ -7,3 +7,4 @@ safetensors
 gunicorn
 pandas
 scikit-learn
+sacremoses
