@@ -20,7 +20,7 @@ FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173")
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": [FRONTEND_URL]}})
 
-tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
+tokenizer = AutoTokenizer.from_pretrained(MODEL_ID, use_fast=False)
 model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_ID)
 
 @app.get("/")
