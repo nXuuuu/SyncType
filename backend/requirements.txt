@@ -6,3 +6,4 @@ sentencepiece
 safetensors
 gunicorn
 pandas
+scikit-learn
