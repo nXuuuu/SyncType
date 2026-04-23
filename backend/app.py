@@ -12,7 +12,7 @@ from sklearn.neighbors import NearestNeighbors
 import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+from transformers import MarianTokenizer, AutoModelForSeq2SeqLM
 
 MODEL_ID = os.getenv("HF_MODEL_ID", "kev223/synctype-model")
 FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173")
@@ -20,7 +20,7 @@ FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173")
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": [FRONTEND_URL]}})
 
-tokenizer = AutoTokenizer.from_pretrained(MODEL_ID, use_fast=False)
+tokenizer = MarianTokenizer.from_pretrained(MODEL_ID)
 model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_ID)
 
 @app.get("/")
